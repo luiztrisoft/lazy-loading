@@ -14,6 +14,7 @@ import javax.persistence.criteria.Root;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.util.StringUtils;
 
 import com.trisoft.lazyproject.entity.Jogador;
 
@@ -40,7 +41,13 @@ public class JogadorRepositoryImpl implements JogadorRepositoryQuery {
 
 	private Predicate[] criarRestricoes(JogadorFilter jogadorFilter, CriteriaBuilder builder, Root<Jogador> root) {
 		List<Predicate> predicates = new ArrayList<>();
+
 		// predicates.add(builder.equal(root.get("id"),jogadorFilter.getId()));
+
+		if (!StringUtils.isEmpty(jogadorFilter.getNome())) {
+			String param = "%" + jogadorFilter.getNome().toLowerCase() + "%";
+			predicates.add(builder.like(builder.lower(root.get("nome")), param));
+		}
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
 

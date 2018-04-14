@@ -3,6 +3,7 @@ package com.trisoft.lazyproject.repository;
 public class JogadorFilter {
 
 	private Long id;
+	private String nome;
 
 	public Long getId() {
 		return id;
@@ -10,6 +11,14 @@ public class JogadorFilter {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 }
